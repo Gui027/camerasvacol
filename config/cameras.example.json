@@ -1,0 +1,43 @@
+{
+  "default_camera_id": "cam_001",
+  "cameras": [
+    {
+      "id": "cam_001",
+      "nome": "Camera 001",
+      "rua": "Rua Exemplo, 123",
+      "cidade": "Cidade - UF",
+      "cep": "00000-000",
+      "latitude": -23.000000,
+      "longitude": -46.000000,
+      "source": "https://www.youtube.com/live/ID_DA_CAMERA",
+      "spots_file": "cameras/cam_001/vagas.json",
+      "pixel_threshold": 1000,
+      "free_threshold": 500,
+      "processing": {
+        "adaptive_block": 25,
+        "adaptive_c": 16,
+        "blur": 5,
+        "dilate": 3
+      }
+    },
+    {
+      "id": "cam_002",
+      "nome": "Camera 002",
+      "rua": "Avenida Exemplo, 456",
+      "cidade": "Cidade - UF",
+      "cep": "00000-000",
+      "latitude": -23.000100,
+      "longitude": -46.000100,
+      "source": "rtsp://host:554/stream1",
+      "spots_file": "cameras/cam_002/vagas.json",
+      "pixel_threshold": 1000,
+      "free_threshold": 500,
+      "processing": {
+        "adaptive_block": 25,
+        "adaptive_c": 16,
+        "blur": 5,
+        "dilate": 3
+      }
+    }
+  ]
+}

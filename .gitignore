@@ -1,0 +1,62 @@
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+*.local.*
+
+# Local app configuration with real camera URLs/credentials
+config/cameras.json
+!config/cameras.example.json
+
+# Runtime logs and temporary files
+*.log
+logs/
+*.pid
+tmp/
+temp/
+
+# Generated camera/media artifacts
+*_preview.png
+*_preview.jpg
+*_preview.jpeg
+captures/
+frames/
+outputs/
+runs/
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Model/checkpoint artifacts
+*.pt
+*.pth
+*.onnx
+*.engine
+
+# Local tool/IDE state
+.claude/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,62 @@
+#!/usr/bin/env python
+import re
+import subprocess
+import sys
+
+
+def git(*args):
+    return subprocess.check_output(["git", *args], text=True, encoding="utf-8")
+
+
+def staged_files(*extra_args):
+    output = git("diff", "--cached", "--name-only", *extra_args)
+    return [line.strip() for line in output.splitlines() if line.strip()]
+
+
+blocked_re = re.compile(
+    r"(^|/)(venv|\.venv|env|ENV|__pycache__|\.claude)(/|$)"
+    r"|(^|/)config/cameras\.json$"
+    r"|\.log$"
+    r"|_preview\.(png|jpe?g)$"
+    r"|\.(mp4|avi|mov|mkv|pt|pth|onnx|engine)$",
+    re.IGNORECASE,
+)
+
+blocked = [path for path in staged_files() if blocked_re.search(path)]
+if blocked:
+    print("Commit bloqueado: arquivos locais/sensiveis foram adicionados ao stage:")
+    for path in blocked:
+        print(f"  - {path}")
+    print("\nRemova do stage com: git restore --staged <arquivo>")
+    sys.exit(1)
+
+secret_re = re.compile(
+    r"rtsp://[^\s\"']+:[^\s@\"']+@"
+    r"|https://connect-248"
+    r"|97938e716389"
+    r"|api[_-]?key\s*[:=]"
+    r"|secret\s*[:=]"
+    r"|password\s*[:=]",
+    re.IGNORECASE,
+)
+
+text_exts = {".py", ".json", ".md", ".txt", ".service", ".sh", ".env", ".yml", ".yaml"}
+hits = []
+
+for path in staged_files("--diff-filter=ACMR"):
+    if not any(path.endswith(ext) for ext in text_exts):
+        continue
+    try:
+        content = git("show", f":{path}")
+    except subprocess.CalledProcessError:
+        continue
+    for line_no, line in enumerate(content.splitlines(), 1):
+        if secret_re.search(line):
+            hits.append((path, line_no, line.strip()))
+
+if hits:
+    print("Commit bloqueado: possivel segredo/URL privada encontrado no stage:")
+    for path, line_no, line in hits:
+        print(f"  - {path}:{line_no}: {line}")
+    print("\nSe for apenas exemplo, use placeholders sem credenciais reais.")
+    sys.exit(1)
