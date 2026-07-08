@@ -21,10 +21,6 @@ ENV/
 *.local
 *.local.*
 
-# Local app configuration with real camera URLs/credentials
-config/cameras.json
-!config/cameras.example.json
-
 # Runtime logs and temporary files
 *.log
 logs/
@@ -50,6 +46,9 @@ runs/
 *.pth
 *.onnx
 *.engine
+
+# Local installers/binaries
+*.exe
 
 # Local tool/IDE state
 .claude/

@@ -1,0 +1,43 @@
+{
+  "default_camera_id": "cam_001",
+  "cameras": [
+    {
+      "id": "cam_001",
+      "nome": "Camera 001",
+      "rua": "Praca Frei Jose, 9 - Esplanada",
+      "cidade": "Colatina - ES",
+      "cep": "29700-230",
+      "latitude": -19.537228604916812,
+      "longitude": -40.63060131612957,
+      "source": "https://www.youtube.com/live/6OoxjzKP4N4",
+      "spots_file": "cameras/cam_001/vagas.json",
+      "pixel_threshold": 1000,
+      "free_threshold": 500,
+      "processing": {
+        "adaptive_block": 25,
+        "adaptive_c": 16,
+        "blur": 5,
+        "dilate": 3
+      }
+    },
+    {
+      "id": "cam_002",
+      "nome": "Camera 002",
+      "rua": "Anchieta Praca Central",
+      "cidade": "Anchieta - ES",
+      "cep": "29230-000",
+      "latitude": -20.805465637271546,
+      "longitude": -40.65302960042885,
+      "source": "https://connect-248.servicestream.io:8050/97938e716389.m3u8",
+      "spots_file": "cameras/cam_002/vagas.json",
+      "pixel_threshold": 1000,
+      "free_threshold": 500,
+      "processing": {
+        "adaptive_block": 25,
+        "adaptive_c": 16,
+        "blur": 5,
+        "dilate": 3
+      }
+    }
+  ]
+}
